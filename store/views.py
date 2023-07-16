@@ -53,6 +53,14 @@ def signup(request):
 
         error_msg = None
 
+
+        # customer object
+        customer = Customer(first_name=first_name,
+                            last_name=last_name,
+                            phone=phone,
+                            email=email,
+                            password=password)
+
         if not first_name:
             error_msg = "First Name Required"
         elif len(first_name) < 3:
@@ -69,17 +77,11 @@ def signup(request):
             error_msg = "Password should be 7 char long or more"
         elif len(email) < 7:
             error_msg = "Email should be 7 char long or more"
-    
+        elif customer.isExists():
+            error_msg = 'Email Already Registered'
 
         # Saving after validation 
         if not error_msg:
-            # customer object
-            customer = Customer(first_name=first_name,
-                                last_name=last_name,
-                                phone=phone,
-                                email=email,
-                                password=password)
-            
             customer.register()  # calling this function which is present in customer.py
 
 
