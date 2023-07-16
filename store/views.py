@@ -61,47 +61,6 @@ def registerUser(request):
     email = post_data.get('email')
     password = post_data.get('password')
 
-<<<<<<< HEAD
-        if not first_name:
-            error_msg = "First Name Required"
-        elif len(first_name) < 3:
-            error_msg = "First Name should be 3 char long or more"
-        elif not last_name:
-            error_msg = "Last Name Required"
-        elif len(last_name) < 3:
-            error_msg = "First Name should be 3 char long or more"
-        elif not phone:
-            error_msg = "Phone Number Required"
-        elif len(phone) < 10:
-            error_msg = "Enter Valid Phone Number"
-        elif len(password) < 7:
-            error_msg = "Password should be 7 char long or more"
-        elif len(email) < 7:
-            error_msg = "Email should be 7 char long or more"
-
-        # Saving after validation 
-        if not error_msg:
-            # customer object
-            customer = Customer(first_name=first_name,
-                                last_name=last_name,
-                                phone=phone,
-                                email=email,
-                                password=password)
-            
-            customer.register()  # calling this function which is present in customer.py
-        else:
-            return render(request, 'signup.html',{'error': error_msg})
-        
-
-
-# login page
-
-def login(request):
-    if request.method == 'GET':
-        return render(request,'login.html')
-    
-
-=======
     # Storing this data in a value dictionary so that these data can be stored in a form even if any field is empty
     value = {
         'first_name' : first_name,
@@ -141,5 +100,11 @@ def signup(request):
         return render(request, 'signup.html')
     else:
         return registerUser(request)
->>>>>>> develop
+    
+
+# login page
+
+def login(request):
+    if request.method == 'GET':
+        return render(request,'login.html')
        
