@@ -39,6 +39,16 @@ def signup(request):
         email = post_data.get('email')
         password = post_data.get('password')
 
+
+        # Storing this data in a value dictionary so that these data can be stored in a form even if any field is empty
+        value = {
+            'first_name' : first_name,
+            'last_name' : last_name,
+            'phone' : phone,
+            'email' : email,
+            'password' : password,
+        }
+
         # Validation
 
         error_msg = None
@@ -59,10 +69,7 @@ def signup(request):
             error_msg = "Password should be 7 char long or more"
         elif len(email) < 7:
             error_msg = "Email should be 7 char long or more"
-        
-
-
-
+    
 
         # Saving after validation 
         if not error_msg:
@@ -74,6 +81,13 @@ def signup(request):
                                 password=password)
             
             customer.register()  # calling this function which is present in customer.py
+
+            
+            return render(request, 'index.html')
         else:
-            return render(request, 'signup.html',{'error': error_msg})
+            data = {
+                'error' : error_msg,
+                'values' : value
+            }
+            return render(request, 'signup.html',data)
        
