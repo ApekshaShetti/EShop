@@ -59,10 +59,6 @@ def signup(request):
             error_msg = "Password should be 7 char long or more"
         elif len(email) < 7:
             error_msg = "Email should be 7 char long or more"
-        
-
-
-
 
         # Saving after validation 
         if not error_msg:
@@ -76,4 +72,14 @@ def signup(request):
             customer.register()  # calling this function which is present in customer.py
         else:
             return render(request, 'signup.html',{'error': error_msg})
+        
+
+
+# login page
+
+def login(request):
+    if request.method == 'GET':
+        return render(request,'login.html')
+    
+
        

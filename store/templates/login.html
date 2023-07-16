@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">   
+        <div class="p-4 m-4">
+            <div class="col-lg-4 mt-4 mb-4 mx-auto border rounded pt-4 pb-2 pl-3 pr-3">
+                <h3 class="alert alert-light border rounded">Login</h3>
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+
+                    
+                    <!-- Showing alert message if form details are not right after validation which is done in views.py-->
+
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                      {{error}}
+                    </div>
+                    {% endif %}
+
+                    <!-- email-->
+                    <div class="form-group">
+                      <label for="">Email</label>
+                      <input required type="email" name="email" id="" class="form-control form-control-sm" placeholder="example@gmail.com">
+                    </div>
+                    <!-- password-->
+                    <div class="form-group">
+                      <label for="">Password</label>
+                      <input type="password" name="password" id="" class="form-control form-control-sm" placeholder="********">
+                    </div>
+                    <!-- button-->
+                    <div class="form-group pt-2">
+                      <input class="btn btn-sm btn-info col-lg-4" type="submit" name="submit" id="" value="Login">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock%}
