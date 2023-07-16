@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse  # when we route a url what should be on screen particularly a text can be done with this
 from .models.product import Product # importing this to get the data of all product which is present in models->product
 from .models.category import Category # importing this to get the data of all category which is present in models->category
@@ -82,8 +82,8 @@ def signup(request):
             
             customer.register()  # calling this function which is present in customer.py
 
-            
-            return render(request, 'index.html')
+
+            return redirect('homepage')   # home page is the name given to index page which is present in urls.py 
         else:
             data = {
                 'error' : error_msg,
