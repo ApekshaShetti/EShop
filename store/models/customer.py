@@ -10,3 +10,10 @@ class Customer(models.Model):
 
     def register(self):
         self.save() # to save the values which are coming from signup page
+
+
+    def isExists(self):
+        if Customer.objects.filter(email = self.email):
+            return True
+        return False
+            
