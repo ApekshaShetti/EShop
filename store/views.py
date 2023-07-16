@@ -3,6 +3,7 @@ from django.http import HttpResponse  # when we route a url what should be on sc
 from .models.product import Product # importing this to get the data of all product which is present in models->product
 from .models.category import Category # importing this to get the data of all category which is present in models->category
 from .models.customer import Customer # importing this to get the data of all customer which is present in models->customer
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -82,6 +83,7 @@ def signup(request):
 
         # Saving after validation 
         if not error_msg:
+            customer.password = make_password(customer.password)  # hashing the password in admin panel
             customer.register()  # calling this function which is present in customer.py
 
 
