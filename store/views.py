@@ -31,7 +31,7 @@ def index(request):   # function to show what should be there when i write local
 def validateCustomer(first_name,last_name,phone,password,email,customer):
     error_msg = None
     if not first_name:
-            error_msg = "First Name Required"
+        error_msg = "First Name Required"
     elif len(first_name) < 3:
         error_msg = "First Name should be 3 char long or more"
     elif not last_name:
@@ -48,11 +48,10 @@ def validateCustomer(first_name,last_name,phone,password,email,customer):
         error_msg = "Email should be 7 char long or more"
     elif customer.isExists():
         error_msg = 'Email Already Registered'
-    
     return error_msg
 
 
-
+# if request.method == 'POST'
 def registerUser(request):
     post_data = request.POST
     first_name = post_data.get('fname')
