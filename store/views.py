@@ -100,4 +100,11 @@ def signup(request):
         return render(request, 'signup.html')
     else:
         return registerUser(request)
+    
+
+# login page
+
+def login(request):
+    if request.method == 'GET':
+        return render(request,'login.html')
        
