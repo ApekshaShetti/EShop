@@ -3,7 +3,7 @@ from django.http import HttpResponse  # when we route a url what should be on sc
 from .models.product import Product # importing this to get the data of all product which is present in models->product
 from .models.category import Category # importing this to get the data of all category which is present in models->category
 from .models.customer import Customer # importing this to get the data of all customer which is present in models->customer
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password, check_password # for password hashing in admin panel
 
 # Create your views here.
 
@@ -49,7 +49,6 @@ def validateCustomer(first_name,last_name,phone,password,email,customer):
     elif customer.isExists():
         error_msg = 'Email Already Registered'
     return error_msg
-
 
 # if request.method == 'POST'
 def registerUser(request):
@@ -106,4 +105,19 @@ def signup(request):
 def login(request):
     if request.method == 'GET':
         return render(request,'login.html')
-       
+    else:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        customer = Customer.getCustomerByEmail(email)   # calling the function which is present in customer.py file
+        error_msg = None
+
+        if customer:
+            flag = check_password(password,customer.password)
+            if flag:
+                return redirect('homepage')
+            else:
+                error_msg = "Email/Password is Invalid"        
+        else:
+            error_msg = "Email/Password is Invalid"        
+        return render(request, 'login.html', {'error' : error_msg})
