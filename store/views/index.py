@@ -26,7 +26,7 @@ def index(request):   # function to show what should be there when i write local
     data = {}
     data['all_products'] = all_products 
     data['all_categories'] = all_categories 
-
+    print('You are' , request.session.get('email'))
     return render(request,'index.html',data)  # sending all data to index.html file
 
 

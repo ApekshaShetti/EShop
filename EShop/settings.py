@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
+    "django.contrib.sessions",  # for managing sessions
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "store"    # include the store application
