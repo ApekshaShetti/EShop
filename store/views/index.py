@@ -10,6 +10,11 @@ from django.views import View
 
 class Index(View):
     def get(self,request):
+        # will create a empty cart initially 
+        cart = request.session.get('cart')
+        if not cart:
+            request.session['cart'] = {}
+
         all_products = None # when route this page it will call the function from products.py is present in models folder                                                                                                                                                                                                                        
         all_categories = Category.get_all_categories() # when route this page it will call the function from category.py is present in models folder 
         category_id = request.GET.get('category')
@@ -31,10 +36,17 @@ class Index(View):
     def post(self,request):
         product = request.POST.get('product')
         cart = request.session.get('cart')
+        remove = request.POST.get('remove')
         if cart:
             qty = cart.get(product)
             if qty:
-                cart[product] = qty + 1
+                if remove:
+                    if qty <= 1:
+                        cart.pop(product)
+                    else:
+                        cart[product] = qty - 1
+                else:
+                    cart[product] = qty + 1
             else:
                 cart[product] = 1
         else:
