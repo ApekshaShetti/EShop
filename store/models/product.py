@@ -19,3 +19,8 @@ class Product(models.Model):
         else:
             # if category id is not given then show all products 
             return Product.get_all_products()
+        
+
+    @staticmethod
+    def get_products_by_id(ids):
+        return Product.objects.filter(id__in = ids)
