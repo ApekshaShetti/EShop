@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from .views import index, login, signup,cart
 from .views.login import logout 
+from .views.checkout import Checkout 
+from .views.orders import OrderView
 
 urlpatterns = [
     path('',index.Index.as_view(), name='homepage'), # calling the index function that is present in views.py to show the data when i route localhost:8000
@@ -9,4 +11,6 @@ urlpatterns = [
     path('login',login.Login.as_view(), name = 'login'),
     path('logout', logout, name = 'logout'),
     path('cart', cart.Cart.as_view(), name = 'cart'),
+    path('checkout', Checkout.as_view(), name = 'checkout'),
+    path('orders', OrderView.as_view(), name = 'orders'),
 ]
