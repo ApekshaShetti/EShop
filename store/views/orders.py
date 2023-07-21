@@ -10,4 +10,5 @@ class OrderView(View):
     def get(self,request):
         customer = request.session.get('customer')
         orders = Order.get_orders_by_customers(customer)
+        # orders = orders.reverse()
         return render(request,'orders.html',{'orders': orders})
