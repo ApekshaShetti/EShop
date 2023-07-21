@@ -35,7 +35,10 @@ It also consist of block content for data to take from index.html file -->
         <!-- right side nav bar  -->
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item ">
-            <a class="nav-link" href="/cart">Cart <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/cart">Cart 
+              <!-- Show the number of items in cart  -->
+              <span class="badge badge-info">{{request.session.cart.keys|length}}</span>   
+              <span class="sr-only">(current)</span></a>
           </li>
           {% if request.session.customer %}
           <li class="nav-item ">
