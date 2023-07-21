@@ -4,6 +4,8 @@ from .views import index, login, signup,cart
 from .views.login import logout 
 from .views.checkout import Checkout 
 from .views.orders import OrderView
+from .middlewares.auth import auth_middleware
+
 
 urlpatterns = [
     path('',index.Index.as_view(), name='homepage'), # calling the index function that is present in views.py to show the data when i route localhost:8000
@@ -12,5 +14,6 @@ urlpatterns = [
     path('logout', logout, name = 'logout'),
     path('cart', cart.Cart.as_view(), name = 'cart'),
     path('checkout', Checkout.as_view(), name = 'checkout'),
-    path('orders', OrderView.as_view(), name = 'orders'),
+    path('orders', auth_middleware(OrderView.as_view()), name = 'orders'),
+
 ]
